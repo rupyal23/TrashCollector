@@ -17,9 +17,9 @@ namespace TrashCollector
 
         private void CreateRolesAndUsers()
         {
-            ApplicationDbContext db = new ApplicationDbContext();
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            ApplicationDbContext context = new ApplicationDbContext();
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             //create new role -Admin
             if(!roleManager.RoleExists("Admin"))
