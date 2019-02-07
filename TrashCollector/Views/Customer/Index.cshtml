@@ -1,7 +1,7 @@
 ﻿@model TrashCollector.Models.Customer
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -25,11 +25,11 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.Pickup.Day)
+                @Html.DisplayNameFor(model => model.PickUpDay)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Pickup.Day)
+                @Html.DisplayFor(model => model.PickUpDay)
             </dd>
     
             <dt>
@@ -55,23 +55,6 @@
             <dd>
                 @Html.DisplayFor(model => model.Email)
             </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.UserName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.UserName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Password)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Password)
-            </dd>
-    
             <dt>
                 @Html.DisplayNameFor(model => model.Balance)
             </dt>

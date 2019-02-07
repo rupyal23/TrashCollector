@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,16 +32,29 @@ namespace TrashCollector.Controllers
         // GET: Customer/Create
         public ActionResult Create()
         {
-            return View();
+            var viewModel = new CustomerAddressViewModel
+            {
+                Customer = new Customer(),
+                Address = new Address()
+            };
+            return View(viewModel);
         }
 
         // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(Customer customer)
+        public ActionResult Create(CustomerAddressViewModel viewModel)
         {
             try
             {
-                context.Customers.Add(customer);
+                //Seed Address First in Database
+                context.Addresses.Add(viewModel.Address);
+                context.SaveChanges();
+                //Set Customer Address FK to Address Id
+                viewModel.Customer.AddressId = viewModel.Address.Id;
+                //Get User Id keyed to the customer Application User Id
+                viewModel.Customer.AppicationUserId = User.Identity.GetUserId();
+                //Now Add Customer to database
+                context.Customers.Add(viewModel.Customer);
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }

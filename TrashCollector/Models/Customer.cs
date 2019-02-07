@@ -36,16 +36,14 @@ namespace TrashCollector.Models
 
         public double Budget { get; set; }
 
-        [ForeignKey("Pickup")]
         [Display(Name = "Next Pickup")]
-        public int NextPickupId { get; set; }
-        public Pickup Pickup { get; set; }
+        public DateTime? PickUpDay { get; set; }
 
         [Display(Name = "Suspend Start Date")]
-        public string SuspendStartDate { get; set; }
+        public DateTime? SuspendStartDate { get; set; }
 
         [Display(Name = "Suspend End Date")]
-        public string SuspendEndDate { get; set; }
+        public DateTime? SuspendEndDate { get; set; }
         
 
     }
