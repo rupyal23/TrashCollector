@@ -23,11 +23,6 @@ namespace TrashCollector.Models
         public int AddressId { get; set; }
         public Address Address { get; set; }
 
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
         [ForeignKey ("ApplicationUser")]
         public string AppicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

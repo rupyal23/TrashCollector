@@ -195,6 +195,18 @@
     <Compile Include="Migrations\201902071851143_ChangedCustomerIdPropToString.Designer.cs">
       <DependentUpon>201902071851143_ChangedCustomerIdPropToString.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902071934082_DeletedEmailPropInCustomer.cs" />
+    <Compile Include="Migrations\201902071934082_DeletedEmailPropInCustomer.Designer.cs">
+      <DependentUpon>201902071934082_DeletedEmailPropInCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902072101401_AddedAddressString.cs" />
+    <Compile Include="Migrations\201902072101401_AddedAddressString.Designer.cs">
+      <DependentUpon>201902072101401_AddedAddressString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902072109349_RemovedAddressString.cs" />
+    <Compile Include="Migrations\201902072109349_RemovedAddressString.Designer.cs">
+      <DependentUpon>201902072109349_RemovedAddressString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -270,6 +282,7 @@
     <Content Include="Views\Customer\Create.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,6 +309,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902071851143_ChangedCustomerIdPropToString.resx">
       <DependentUpon>201902071851143_ChangedCustomerIdPropToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902071934082_DeletedEmailPropInCustomer.resx">
+      <DependentUpon>201902071934082_DeletedEmailPropInCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902072101401_AddedAddressString.resx">
+      <DependentUpon>201902072101401_AddedAddressString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902072109349_RemovedAddressString.resx">
+      <DependentUpon>201902072109349_RemovedAddressString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

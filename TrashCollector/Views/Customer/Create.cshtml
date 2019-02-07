@@ -50,8 +50,12 @@
             @Html.TextBoxFor(model => model.Address.Zip, new { @class = "form-control" })
         </div>
         <div class="form-group">
+            @Html.LabelFor(model => model.Customer.PickUpDay)
+            @Html.TextBoxFor(model => model.Customer.PickUpDay, "{0: d MM yyyy}", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
             @Html.LabelFor(model => model.Customer.Budget)
-            @Html.TextBoxFor(model => model.Customer.Budget, new { @class = "form-control" } )
+            @Html.TextBoxFor(model => model.Customer.Budget, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Customer.Budget, "", new { @class = "text-danger" })
 
         </div>
@@ -71,4 +75,5 @@
     }
 
 </body>
+@Html.HiddenFor(m =>m.Customer.Id);
 </html>

@@ -1,4 +1,4 @@
-﻿@model TrashCollector.Models.Customer
+﻿@model TrashCollector.Models.CustomerAddressViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,11 +9,11 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>@Model.Customer.FirstName HomePage</title>
 </head>
 <body>
     <div>
-        <h4>Customer</h4>
+        <h4>Hello @Model.Customer.FirstName @Model.Customer.LastName</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -25,72 +25,64 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.PickUpDay)
+                @Html.DisplayNameFor(model => model.Customer.PickUpDay)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.PickUpDay)
+                @Html.DisplayFor(model => model.Customer.PickUpDay)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.Customer.FirstName)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.FirstName)
+                @Html.DisplayFor(model => model.Customer.FirstName)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.Customer.LastName)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.LastName)
+                @Html.DisplayFor(model => model.Customer.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Customer.Balance)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Customer.Balance)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.Customer.Budget)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Balance)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Balance)
+                @Html.DisplayFor(model => model.Customer.Budget)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.Budget)
+                @Html.DisplayNameFor(model => model.Customer.SuspendStartDate)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Budget)
+                @Html.DisplayFor(model => model.Customer.SuspendStartDate)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.SuspendStartDate)
+                @Html.DisplayNameFor(model => model.Customer.SuspendEndDate)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.SuspendStartDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.SuspendEndDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.SuspendEndDate)
+                @Html.DisplayFor(model => model.Customer.SuspendEndDate)
             </dd>
     
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 </body>

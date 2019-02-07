@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,9 +25,15 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Customer/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            return View();
+            var userLoggedIn = User.Identity.GetUserId();
+            var customer = context.Customers.Include(a => a.Address).Where(c => c.AppicationUserId == userLoggedIn).SingleOrDefault();
+            if(customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
         }
 
         // GET: Customer/Create
@@ -56,7 +63,7 @@ namespace TrashCollector.Controllers
                 //Now Add Customer to database
                 context.Customers.Add(viewModel.Customer);
                 context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", viewModel.Customer.Id);
             }
             catch
             {
