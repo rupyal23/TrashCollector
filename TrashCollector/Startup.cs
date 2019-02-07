@@ -21,25 +21,25 @@ namespace TrashCollector
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            //create new role -Admin
-            if(!roleManager.RoleExists("Admin"))
-            {
-                roleManager.Create(new IdentityRole("Admin"));
+            ////create new role -Admin
+            //if(!roleManager.RoleExists("Admin"))
+            //{
+            //    roleManager.Create(new IdentityRole("Admin"));
 
-                //After creating admin role, creating admin user
-                var user = new ApplicationUser();
-                user.UserName = "rupyal";
-                user.Email = "rupyal@trashcollector.com";
+            //    //After creating admin role, creating admin user
+            //    var user = new ApplicationUser();
+            //    user.UserName = "rupyal";
+            //    user.Email = "rupyal@trashcollector.com";
 
-                string userPWD = "Test@123";
+            //    string userPWD = "Test@123";
 
-                var chkUser = userManager.Create(user, userPWD);
-                //Add this user to Admin role
-                if(chkUser.Succeeded)
-                {
-                    var result1 = userManager.AddToRole(user.Id, "Admin");
-                }
-            }
+            //    var chkUser = userManager.Create(user, userPWD);
+            //    //Add this user to Admin role
+            //    if(chkUser.Succeeded)
+            //    {
+            //        var result1 = userManager.AddToRole(user.Id, "Admin");
+            //    }
+            //}
 
             // creating Customer Role
             if(!roleManager.RoleExists("Customer"))

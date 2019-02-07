@@ -3,7 +3,7 @@ namespace TrashCollector.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class oldtablesmigrationdeleted : DbMigration
+    public partial class StartupMigration : DbMigration
     {
         public override void Up()
         {
@@ -28,9 +28,7 @@ namespace TrashCollector.Migrations
                         FirstName = c.String(),
                         LastName = c.String(),
                         AddressId = c.Int(nullable: false),
-                        Email = c.String(),
-                        UserName = c.String(),
-                        Password = c.String(),
+                        Email = c.String(nullable: false),
                         Balance = c.Double(nullable: false),
                         Budget = c.Double(nullable: false),
                         NextPickupId = c.Int(nullable: false),
@@ -97,6 +95,7 @@ namespace TrashCollector.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        UserRole = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
