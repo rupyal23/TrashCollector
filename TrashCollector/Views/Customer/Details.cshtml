@@ -104,6 +104,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Change Pick Up Day", "UpdatePickup", new { id = Model.Id })
-    @Html.ActionLink("Request Extra Pick Up", "UpdatePickup")
+    @Html.ActionLink("Update Pickup", "UpdatePickup", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Suspend Service", "SuspendService", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("View Balance", "Balance", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
 </p>

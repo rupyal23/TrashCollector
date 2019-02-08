@@ -293,6 +293,7 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Customer\UpdatePickup.cshtml" />
+    <Content Include="Views\Customer\SuspendService.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

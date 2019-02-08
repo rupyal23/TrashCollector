@@ -18,10 +18,10 @@ namespace TrashCollector.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Customer
-        public ActionResult Index()
+        public ActionResult Index(CustomerAddressViewModel Model)
         {
-
-            return View();
+            var customer = Model.Customer;
+            return View("Details", customer);
         }
 
         // GET: Customer/Details/5
@@ -140,6 +140,40 @@ namespace TrashCollector.Controllers
                 return View();
             }
         }
+
+        public ViewResult SuspendService()
+        {
+            var userLoggedIn = User.Identity.GetUserId();
+            var customer = context.Customers.SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+            return View(customer);
+        }
+
+        [HttpPost]
+        public ActionResult SuspendService(Customer customer)
+        {
+            try
+            {
+                var userLoggedIn = User.Identity.GetUserId();
+                var customerFromDb = context.Customers.SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+                if(customerFromDb == null)
+                {
+                    return HttpNotFound();
+                }
+                var viewModel = new CustomerAddressViewModel
+                {
+                    Customer = customerFromDb,
+                    Address = customerFromDb.Address
+                };
+                viewModel.Customer.SuspendStartDate = customer.SuspendStartDate;
+                viewModel.Customer.SuspendEndDate = customer.SuspendEndDate;
+                context.SaveChanges();
+                return View("Index", viewModel);
+            }
+            catch
+            {
+                return View();
+            }
+        }
         // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
@@ -161,5 +195,12 @@ namespace TrashCollector.Controllers
                 return View();
             }
         }
+        public ViewResult Balance(Customer customer)
+        {
+            var userLoggedIn = User.Identity.GetUserId();
+            var customerFromDb = context.Customers.Include(m => m.Address).SingleOrDefault(a => a.AppicationUserId == userLoggedIn);
+            return View("Details", customerFromDb);
+        }
+
     }
 }
