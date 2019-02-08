@@ -25,6 +25,10 @@ namespace TrashCollector.Models
 
         public int Zip { get; set; }
 
+        [ForeignKey("ApplicationUser")]
+        public string AppicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+
         [ForeignKey("Pickup")]
         [Display(Name = "Pickup")]
         public int PickupId { get; set; }

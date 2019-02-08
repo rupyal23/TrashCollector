@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,10 +16,18 @@ namespace TrashCollector.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Employee
+        //Get a default list of pickups matchin the employee zip code
         public ActionResult Index()
         {
-            var pickups = context.Pickups.ToList();
-            return View();
+            var userLoggedIn = User.Identity.GetUserId();
+            var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
+            var pickups = context.Pickups.Where(z => z.Zip == employee.Zip).ToList();
+            var viewModel = new EmployeeViewModel
+            {
+                Pickups = pickups,
+                Employee = employee
+            };
+            return View(viewModel);
         }
 
         // GET: Employee/Details/5
@@ -34,7 +43,7 @@ namespace TrashCollector.Controllers
             {
                 Employee = new Employee()
             };
-            return View(viewModel);
+            return View(viewModel.Employee);
         }
 
         // POST: Employee/Create
