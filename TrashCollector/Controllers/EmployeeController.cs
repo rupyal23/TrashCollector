@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
     public class EmployeeController : Controller
     {
+        ApplicationDbContext context;
+        public EmployeeController()
+        {
+            context = new ApplicationDbContext();
+        }
         // GET: Employee
         public ActionResult Index()
         {
+            var pickups = context.Pickups.ToList();
             return View();
         }
 
@@ -23,7 +30,11 @@ namespace TrashCollector.Controllers
         // GET: Employee/Create
         public ActionResult Create()
         {
-            return View();
+            var viewModel = new EmployeeViewModel
+            {
+                Employee = new Employee()
+            };
+            return View(viewModel);
         }
 
         // POST: Employee/Create
