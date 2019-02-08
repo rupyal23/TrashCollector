@@ -130,6 +130,8 @@ namespace TrashCollector.Controllers
                     Address = customerFromDb.Address
                 };
                 viewModel.Customer.PickUpDay = customer.PickUpDay;
+                if(customer.SecondPickUpDay != null)
+                    viewModel.Customer.SecondPickUpDay = customer.SecondPickUpDay;
                 context.SaveChanges();
                 return View("Index", viewModel);
             }

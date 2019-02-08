@@ -34,6 +34,14 @@ namespace TrashCollector.Models
         [Display(Name = "Next Pickup")]
         public DateTime? PickUpDay { get; set; }
 
+        [Display(Name = "Extra Pickup")]
+        public DateTime? SecondPickUpDay { get; set; }
+
+        public bool ExtraPickupRequest { get; set; }
+
+        [Display(Name = "Total Pickups")]
+        public int TotalPickups { get; set; }
+
         [Display(Name = "Suspend Start Date")]
         public DateTime? SuspendStartDate { get; set; }
 
