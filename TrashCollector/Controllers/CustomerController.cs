@@ -43,7 +43,8 @@ namespace TrashCollector.Controllers
             var viewModel = new CustomerAddressViewModel
             {
                 Customer = new Customer(),
-                Address = new Address()
+                Address = new Address(),
+                Pickup = new Pickup()
             };
             return View(viewModel);
         }
@@ -54,14 +55,19 @@ namespace TrashCollector.Controllers
         {
             try
             {
-                //Seed Address First in Database
+                //Seed Address First in Database and Set PK id to FK address ID in customer
                 context.Addresses.Add(viewModel.Address);
                 context.SaveChanges();
-                //Set Customer Address FK to Address Id
                 viewModel.Customer.AddressId = viewModel.Address.Id;
+                //Seed Pickup as well and Set FK pickup id in customer to PK pickup
+                context.Pickups.Add(viewModel.Pickup);
+                context.SaveChanges();
+                viewModel.Customer.PickupId = viewModel.Pickup.Id;
                 //Get User Id keyed to the customer Application User Id
                 viewModel.Customer.AppicationUserId = User.Identity.GetUserId();
                 //Now Add Customer to database
+                context.Pickups.Add(viewModel.Pickup);
+                context.SaveChanges();
                 context.Customers.Add(viewModel.Customer);
                 context.SaveChanges();
                 return RedirectToAction("Details", viewModel.Customer.Id);

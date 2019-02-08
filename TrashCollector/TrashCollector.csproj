@@ -187,6 +187,10 @@
     <Compile Include="Migrations\201902081425129_RedidMigrations.Designer.cs">
       <DependentUpon>201902081425129_RedidMigrations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902081835078_AddedPickupIdFKInCustomer.cs" />
+    <Compile Include="Migrations\201902081835078_AddedPickupIdFKInCustomer.Designer.cs">
+      <DependentUpon>201902081835078_AddedPickupIdFKInCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -289,6 +293,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902081425129_RedidMigrations.resx">
       <DependentUpon>201902081425129_RedidMigrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902081835078_AddedPickupIdFKInCustomer.resx">
+      <DependentUpon>201902081835078_AddedPickupIdFKInCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
