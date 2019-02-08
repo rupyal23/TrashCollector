@@ -7,13 +7,13 @@ namespace TrashCollector.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Added2PropForPickupsInCustomer : IMigrationMetadata
+    public sealed partial class RedidMigrations : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Added2PropForPickupsInCustomer));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RedidMigrations));
         
         string IMigrationMetadata.Id
         {
-            get { return "201902080048122_Added2PropForPickupsInCustomer"; }
+            get { return "201902081425129_RedidMigrations"; }
         }
         
         string IMigrationMetadata.Source

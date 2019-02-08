@@ -18,9 +18,10 @@ namespace TrashCollector.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Customer
-        public ActionResult Index(CustomerAddressViewModel Model)
+        public ActionResult Index()
         {
-            var customer = Model.Customer;
+            var userLoggedIn = User.Identity.GetUserId();
+            var customer = context.Customers.SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
             return View("Details", customer);
         }
 
@@ -154,7 +155,7 @@ namespace TrashCollector.Controllers
             try
             {
                 var userLoggedIn = User.Identity.GetUserId();
-                var customerFromDb = context.Customers.SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+                var customerFromDb = context.Customers.Include(a =>a.Address).SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
                 if(customerFromDb == null)
                 {
                     return HttpNotFound();

@@ -18,11 +18,6 @@ namespace TrashCollector.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "User Name")]
-        public string UserName { get; set; }
-
-        public string Password { get; set; }
-
         public int Zip { get; set; }
 
         [ForeignKey("ApplicationUser")]
@@ -31,7 +26,9 @@ namespace TrashCollector.Models
 
         [ForeignKey("Pickup")]
         [Display(Name = "Pickup")]
-        public int PickupId { get; set; }
+        public int? PickupId { get; set; }
         public Pickup Pickup { get; set; }
+
+        public List<Pickup>Pickups { get; set; }
     }
 }

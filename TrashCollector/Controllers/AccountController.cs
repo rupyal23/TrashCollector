@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TrashCollector.Models;
@@ -80,7 +81,13 @@ namespace TrashCollector.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                     return RedirectToLocal(returnUrl);
+                    //returnUrl = "Index";
+                    //Not Working
+                    //if(User.IsInRole("Customer"))
+                    //    return RedirectToAction(returnUrl, "Customer");
+                    //if (User.IsInRole("Employee"))
+                    //    return RedirectToAction(returnUrl, "Employee");
+                    return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

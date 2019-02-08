@@ -12,7 +12,9 @@ namespace TrashCollector.Models
         [Key]
         public int Id { get; set; }
 
-        public DateTime? PickUpDay { get; set; }
+        public DateTime? PickupDate { get; set; }
+
+        public DayOfWeek? PickupDay { get; set; }
 
         public int Zip { get; set; }
 

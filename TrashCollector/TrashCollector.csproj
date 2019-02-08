@@ -183,45 +183,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902071712528_StartupMigration.cs" />
-    <Compile Include="Migrations\201902071712528_StartupMigration.Designer.cs">
-      <DependentUpon>201902071712528_StartupMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902071722468_AddedApplicationUserIdInCustomer.cs" />
-    <Compile Include="Migrations\201902071722468_AddedApplicationUserIdInCustomer.Designer.cs">
-      <DependentUpon>201902071722468_AddedApplicationUserIdInCustomer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902071851143_ChangedCustomerIdPropToString.cs" />
-    <Compile Include="Migrations\201902071851143_ChangedCustomerIdPropToString.Designer.cs">
-      <DependentUpon>201902071851143_ChangedCustomerIdPropToString.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902071934082_DeletedEmailPropInCustomer.cs" />
-    <Compile Include="Migrations\201902071934082_DeletedEmailPropInCustomer.Designer.cs">
-      <DependentUpon>201902071934082_DeletedEmailPropInCustomer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902072101401_AddedAddressString.cs" />
-    <Compile Include="Migrations\201902072101401_AddedAddressString.Designer.cs">
-      <DependentUpon>201902072101401_AddedAddressString.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902072109349_RemovedAddressString.cs" />
-    <Compile Include="Migrations\201902072109349_RemovedAddressString.Designer.cs">
-      <DependentUpon>201902072109349_RemovedAddressString.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902080048122_Added2PropForPickupsInCustomer.cs" />
-    <Compile Include="Migrations\201902080048122_Added2PropForPickupsInCustomer.Designer.cs">
-      <DependentUpon>201902080048122_Added2PropForPickupsInCustomer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902080129443_AddedBoolPropertyCustomer.cs" />
-    <Compile Include="Migrations\201902080129443_AddedBoolPropertyCustomer.Designer.cs">
-      <DependentUpon>201902080129443_AddedBoolPropertyCustomer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902080324097_AddedPickupTablePropInEmployee.cs" />
-    <Compile Include="Migrations\201902080324097_AddedPickupTablePropInEmployee.Designer.cs">
-      <DependentUpon>201902080324097_AddedPickupTablePropInEmployee.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902080341336_AddedApplicationUserIdInEmployee.cs" />
-    <Compile Include="Migrations\201902080341336_AddedApplicationUserIdInEmployee.Designer.cs">
-      <DependentUpon>201902080341336_AddedApplicationUserIdInEmployee.cs</DependentUpon>
+    <Compile Include="Migrations\201902081425129_RedidMigrations.cs" />
+    <Compile Include="Migrations\201902081425129_RedidMigrations.Designer.cs">
+      <DependentUpon>201902081425129_RedidMigrations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -229,7 +193,6 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAddressViewModel.cs" />
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pickup.cs" />
@@ -304,6 +267,8 @@
     <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Customer\UpdatePickup.cshtml" />
     <Content Include="Views\Customer\SuspendService.cshtml" />
+    <Content Include="Views\Shared\_LayoutCustomer.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -322,35 +287,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902071712528_StartupMigration.resx">
-      <DependentUpon>201902071712528_StartupMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902071722468_AddedApplicationUserIdInCustomer.resx">
-      <DependentUpon>201902071722468_AddedApplicationUserIdInCustomer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902071851143_ChangedCustomerIdPropToString.resx">
-      <DependentUpon>201902071851143_ChangedCustomerIdPropToString.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902071934082_DeletedEmailPropInCustomer.resx">
-      <DependentUpon>201902071934082_DeletedEmailPropInCustomer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902072101401_AddedAddressString.resx">
-      <DependentUpon>201902072101401_AddedAddressString.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902072109349_RemovedAddressString.resx">
-      <DependentUpon>201902072109349_RemovedAddressString.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902080048122_Added2PropForPickupsInCustomer.resx">
-      <DependentUpon>201902080048122_Added2PropForPickupsInCustomer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902080129443_AddedBoolPropertyCustomer.resx">
-      <DependentUpon>201902080129443_AddedBoolPropertyCustomer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902080324097_AddedPickupTablePropInEmployee.resx">
-      <DependentUpon>201902080324097_AddedPickupTablePropInEmployee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902080341336_AddedApplicationUserIdInEmployee.resx">
-      <DependentUpon>201902080341336_AddedApplicationUserIdInEmployee.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902081425129_RedidMigrations.resx">
+      <DependentUpon>201902081425129_RedidMigrations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

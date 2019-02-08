@@ -22,12 +22,8 @@ namespace TrashCollector.Controllers
             var userLoggedIn = User.Identity.GetUserId();
             var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
             var pickups = context.Pickups.Where(z => z.Zip == employee.Zip).ToList();
-            var viewModel = new EmployeeViewModel
-            {
-                Pickups = pickups,
-                Employee = employee
-            };
-            return View(viewModel);
+           
+            return View(pickups);
         }
 
         // GET: Employee/Details/5
@@ -39,20 +35,18 @@ namespace TrashCollector.Controllers
         // GET: Employee/Create
         public ActionResult Create()
         {
-            var viewModel = new EmployeeViewModel
-            {
-                Employee = new Employee()
-            };
-            return View(viewModel.Employee);
+            return View();
         }
 
         // POST: Employee/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Employee employee)
         {
             try
             {
-                // TODO: Add insert logic here
+                employee.AppicationUserId = User.Identity.GetUserId();
+                context.Employees.Add(employee);
+                context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
