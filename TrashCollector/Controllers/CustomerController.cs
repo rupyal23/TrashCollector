@@ -72,20 +72,28 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Customer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            return View();
+            var userLoggedIn = User.Identity.GetUserId();
+            var customer = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+            if (customer == null)
+                return HttpNotFound();
+            return View("UpdatePickup", customer);
         }
 
         // POST: Customer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Customer customer)
         {
             try
             {
-                // TODO: Add update logic here
+                var customerFromDb = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.Id == customer.Id);
+                //Add Changes - Add logic
+                if (customer == null)
+                    return HttpNotFound();
 
-                return RedirectToAction("Index");
+                context.SaveChanges();
+                return View("Details", customer);
             }
             catch
             {
@@ -93,6 +101,43 @@ namespace TrashCollector.Controllers
             }
         }
 
+        public ActionResult UpdatePickup(int id)
+        {
+            try
+            {
+                var customer = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.Id == id);
+                if (customer == null)
+                    return HttpNotFound();
+                return View(customer);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        [HttpPost]
+        public ActionResult UpdatePickup(Customer customer)
+        {
+            try
+            {
+                var userLoggedIn = User.Identity.GetUserId();
+                var customerFromDb = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+                if (customerFromDb == null)
+                    return HttpNotFound();
+                var viewModel = new CustomerAddressViewModel
+                {
+                    Customer = customerFromDb,
+                    Address = customerFromDb.Address
+                };
+                viewModel.Customer.PickUpDay = customer.PickUpDay;
+                context.SaveChanges();
+                return View("Index", viewModel);
+            }
+            catch
+            {
+                return View();
+            }
+        }
         // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {

@@ -1,5 +1,4 @@
 ﻿@model TrashCollector.Models.Customer
-
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -105,5 +104,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to Home Page", "Index")
+    @Html.ActionLink("Change Pick Up Day", "UpdatePickup", new { id = Model.Id })
+    @Html.ActionLink("Request Extra Pick Up", "UpdatePickup")
 </p>
