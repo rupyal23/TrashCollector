@@ -215,6 +215,18 @@
     <Compile Include="Migrations\201902082122100_ChangedPropinPickup.Designer.cs">
       <DependentUpon>201902082122100_ChangedPropinPickup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902090220072_AddedPropinPickup.cs" />
+    <Compile Include="Migrations\201902090220072_AddedPropinPickup.Designer.cs">
+      <DependentUpon>201902090220072_AddedPropinPickup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902090222034_DeletedSecondPickUpDayInCustomer.cs" />
+    <Compile Include="Migrations\201902090222034_DeletedSecondPickUpDayInCustomer.Designer.cs">
+      <DependentUpon>201902090222034_DeletedSecondPickUpDayInCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902090227260_MadeDateTimeNullable.cs" />
+    <Compile Include="Migrations\201902090227260_MadeDateTimeNullable.Designer.cs">
+      <DependentUpon>201902090227260_MadeDateTimeNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -338,6 +350,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902082122100_ChangedPropinPickup.resx">
       <DependentUpon>201902082122100_ChangedPropinPickup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902090220072_AddedPropinPickup.resx">
+      <DependentUpon>201902090220072_AddedPropinPickup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902090222034_DeletedSecondPickUpDayInCustomer.resx">
+      <DependentUpon>201902090222034_DeletedSecondPickUpDayInCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902090227260_MadeDateTimeNullable.resx">
+      <DependentUpon>201902090227260_MadeDateTimeNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,90 +1,32 @@
 ﻿@model TrashCollector.Models.CustomerAddressViewModel
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Schdeule</h2>
 
 <div>
-    <h4>Customer</h4>
+    <h4>@Model.Customer.FirstName</h4>
     <hr />
     <dl class="dl-horizontal">
+
+
         <dt>
-            @Html.DisplayNameFor(model => model.Customer.FirstName)
+            @Html.DisplayNameFor(model => model.Pickup.PickupDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Customer.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Customer.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address.StreetNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address.StreetNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address.StreetName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address.StreetName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address.City)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address.State)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address.State)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address.Zip)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address.Zip)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.Balance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Customer.Balance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.Budget)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Customer.Budget)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Pickup.PickupDay)
-        </dt>
-
-        <dd>
+            @Html.DisplayFor(model => model.Pickup.PickupDate)
             @Html.DisplayFor(model => model.Pickup.PickupDay)
         </dd>
-
+        <dt>
+            Second Pick-Up
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pickup.SecondPickupDate)
+            @Html.DisplayFor(model => model.Pickup.SecondPickupDay)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Customer.SuspendStartDate)
         </dt>
@@ -105,6 +47,6 @@
 </div>
 <p>
     @Html.ActionLink("Update Pickup", "UpdatePickup", new { id = Model.Customer.Id }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Suspend Service", "SuspendService", new { id = Model.Customer.Id }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("View Balance", "Balance", new { id = Model.Customer.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back", "Details", new { id = Model.Customer.Id }, new { @class = "btn btn-primary" })
+    @Html.HiddenFor(model => model.Customer.Id)
 </p>

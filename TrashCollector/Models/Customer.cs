@@ -31,10 +31,6 @@ namespace TrashCollector.Models
 
         public double Budget { get; set; }
 
-
-        [Display(Name = "Extra Pickup")]
-        public DateTime? SecondPickUpDay { get; set; }
-
         public bool ExtraPickupRequest { get; set; }
 
         [Display(Name = "Total Pickups")]

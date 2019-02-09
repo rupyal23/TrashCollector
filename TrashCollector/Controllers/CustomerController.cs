@@ -22,7 +22,15 @@ namespace TrashCollector.Controllers
         {
             var userLoggedIn = User.Identity.GetUserId();
             var customer = context.Customers.SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
-            return View("Details", customer);
+            var pickup = context.Pickups.SingleOrDefault(p => p.CustomerId == customer.Id);
+
+            var viewModel = new CustomerAddressViewModel
+            {
+                Customer = customer,
+                Pickup = pickup
+
+            };
+            return View(viewModel);
         }
 
         // GET: Customer/Details/5
@@ -57,18 +65,19 @@ namespace TrashCollector.Controllers
             {
                 //Get Duplicate address from Db is any
                 var addressFromDb = context.Addresses.Where(c => c.StreetNumber == viewModel.Address.StreetNumber).Where(d => d.StreetName == viewModel.Address.StreetName)
-                    .Where(e => e.Zip == viewModel.Address.Zip).Single();
+                    .Where(e => e.Zip == viewModel.Address.Zip).SingleOrDefault();
                 if (addressFromDb != null)
                 {
                     viewModel.Customer.AddressId = addressFromDb.Id;
                 }
                 else
                 {
+                    //Seed Address First in Database and Set PK id to FK address ID in customer
                     context.Addresses.Add(viewModel.Address);
                     context.SaveChanges();
                     viewModel.Customer.AddressId = viewModel.Address.Id;
                 }
-                //Seed Address First in Database and Set PK id to FK address ID in customer
+                
                 context.Pickups.Add(viewModel.Pickup);
 
                 //Get User Id keyed to the customer Application User Id
@@ -76,7 +85,7 @@ namespace TrashCollector.Controllers
                 //Now Add Customer to database
                 context.Customers.Add(viewModel.Customer);
                 viewModel.Pickup.CustomerId = viewModel.Customer.Id;
-                viewModel.Pickup.PickupDay = viewModel.Pickup.PickupDate.ToString("dddd");
+                viewModel.Pickup.PickupDay = viewModel.Pickup.PickupDate.Value.ToString("dddd");
                 context.SaveChanges();
                 return RedirectToAction("Details", viewModel.Customer.Id);
             }
@@ -121,9 +130,13 @@ namespace TrashCollector.Controllers
             try
             {
                 var customer = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.Id == id);
-                if (customer == null)
-                    return HttpNotFound();
-                return View(customer);
+                var pickup = context.Pickups.FirstOrDefault(a => a.CustomerId == id);
+                var viewModel = new CustomerAddressViewModel
+                {
+                    Customer = customer,
+                    Pickup = pickup
+                };
+                return View(viewModel);
             }
             catch
             {
@@ -131,22 +144,28 @@ namespace TrashCollector.Controllers
             }
         }
         [HttpPost]
-        public ActionResult UpdatePickup(Customer customer)
+        public ActionResult UpdatePickup(CustomerAddressViewModel Model)
         {
             try
             {
                 var userLoggedIn = User.Identity.GetUserId();
-                var customerFromDb = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
-                if (customerFromDb == null)
+                var customer = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+                if (customer == null)
                     return HttpNotFound();
+                var pickup = context.Pickups.SingleOrDefault(p => p.CustomerId == customer.Id);
                 var viewModel = new CustomerAddressViewModel
                 {
-                    Customer = customerFromDb,
-                    Address = customerFromDb.Address
+                    Customer = customer,
+                    Address = customer.Address,
+                    Pickup = pickup
                 };
-                //viewModel.Pickup.PickupDate = ;
-                if (customer.SecondPickUpDay != null)
-                    viewModel.Customer.SecondPickUpDay = customer.SecondPickUpDay;
+                viewModel.Pickup.PickupDate = Model.Pickup.PickupDate;
+                
+                viewModel.Pickup.SecondPickupDate = Model.Pickup.SecondPickupDate;
+                viewModel.Pickup.SecondPickupDay = Model.Pickup.SecondPickupDate.Value.DayOfWeek.ToString();
+                viewModel.Customer.ExtraPickupRequest = true;
+                
+                    
                 context.SaveChanges();
                 return View("Index", viewModel);
             }
