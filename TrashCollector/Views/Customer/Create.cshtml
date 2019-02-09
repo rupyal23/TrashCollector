@@ -50,8 +50,8 @@
             @Html.TextBoxFor(model => model.Address.Zip, new { @class = "form-control" })
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Pickup.PickupDate)
-            @Html.TextBoxFor(model => model.Pickup.PickupDate, "{0: d MM yyyy}", new { @class = "form-control" })
+            @Html.LabelFor(model => model.Pickup.PickupDay)
+            @Html.DropDownListFor(model => model.Pickup.PickupDay, new SelectList(Model.Day),  new { @class = "form-control" })
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Customer.Budget)
@@ -60,7 +60,7 @@
 
         </div>
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Save" class="btn btn-primary" />
         </div>
     </div>
     }

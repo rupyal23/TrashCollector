@@ -11,5 +11,7 @@ namespace TrashCollector.Models
         public Address Address { get; set; }
 
         public Pickup Pickup { get; set; }
+
+        public IEnumerable<string> Day { get; set; }
     }
 }

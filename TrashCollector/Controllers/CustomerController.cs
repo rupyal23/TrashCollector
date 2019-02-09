@@ -52,7 +52,8 @@ namespace TrashCollector.Controllers
             {
                 Customer = new Customer(),
                 Address = new Address(),
-                Pickup = new Pickup()
+                Pickup = new Pickup(),
+                Day = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }
             };
             return View(viewModel);
         }
@@ -85,7 +86,6 @@ namespace TrashCollector.Controllers
                 //Now Add Customer to database
                 context.Customers.Add(viewModel.Customer);
                 viewModel.Pickup.CustomerId = viewModel.Customer.Id;
-                viewModel.Pickup.PickupDay = viewModel.Pickup.PickupDate.Value.ToString("dddd");
                 context.SaveChanges();
                 return RedirectToAction("Details", viewModel.Customer.Id);
             }
@@ -93,7 +93,7 @@ namespace TrashCollector.Controllers
             {
                 return View();
             }
-        }
+}
 
         // GET: Customer/Edit/5
         public ActionResult Edit()

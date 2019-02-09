@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201902090227260_MadeDateTimeNullable.Designer.cs">
       <DependentUpon>201902090227260_MadeDateTimeNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902092057358_RemovedValidationAttForPickUpDAte.cs" />
+    <Compile Include="Migrations\201902092057358_RemovedValidationAttForPickUpDAte.Designer.cs">
+      <DependentUpon>201902092057358_RemovedValidationAttForPickUpDAte.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -361,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902090227260_MadeDateTimeNullable.resx">
       <DependentUpon>201902090227260_MadeDateTimeNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902092057358_RemovedValidationAttForPickUpDAte.resx">
+      <DependentUpon>201902092057358_RemovedValidationAttForPickUpDAte.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
