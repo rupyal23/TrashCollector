@@ -35,6 +35,7 @@ namespace TrashCollector.Controllers
         // GET: Employee/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
@@ -98,6 +99,20 @@ namespace TrashCollector.Controllers
             {
                 return View();
             }
+        }
+
+
+        //Get
+        public ActionResult SelectPickup()
+        {
+            return View();
+        }
+
+        //Post
+        [HttpPost]
+        public ActionResult SelectPickup(string text)
+        {
+            return View();
         }
     }
 }
