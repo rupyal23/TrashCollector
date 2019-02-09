@@ -9,5 +9,7 @@ namespace TrashCollector.Models
     {
         public Employee Employee { get; set; }
         public Pickup Pickup { get; set; }
+
+        public IEnumerable<string> Day { get; set; }
     }
 }

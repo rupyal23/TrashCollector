@@ -105,14 +105,31 @@ namespace TrashCollector.Controllers
         //Get
         public ActionResult SelectPickup()
         {
-            return View();
+            var userLoggedIn = User.Identity.GetUserId();
+            var employee = context.Employees.SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+            var viewModel = new EmployeeViewModel
+            {
+                Employee = employee,
+                Day = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}
+            };
+            return View(viewModel);
         }
 
         //Post
         [HttpPost]
-        public ActionResult SelectPickup(string text)
+        public ActionResult SelectPickup(EmployeeViewModel Model)
         {
-            return View();
+            string text = Model.Day.ElementAt(0);
+            var userLoggedIn = User.Identity.GetUserId();
+            var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
+            var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).ToList();
+
+            var filteredPickups = pickups.Where(z => z.PickupDay == text).ToList();
+            var filteredPickupsTwo = pickups.Where(a => a.SecondPickupDay == text).ToList();
+
+            filteredPickups.AddRange(filteredPickupsTwo);
+
+            return View("Index", filteredPickups);
         }
     }
 }
