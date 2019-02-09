@@ -189,6 +189,7 @@ namespace TrashCollector.Controllers
             {
                 var userLoggedIn = User.Identity.GetUserId();
                 var customerFromDb = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+                var pickup = context.Pickups.SingleOrDefault(p => p.CustomerId == customerFromDb.Id);
                 if (customerFromDb == null)
                 {
                     return HttpNotFound();
@@ -196,7 +197,7 @@ namespace TrashCollector.Controllers
                 var viewModel = new CustomerAddressViewModel
                 {
                     Customer = customerFromDb,
-                    Address = customerFromDb.Address
+                    Pickup = pickup
                 };
                 viewModel.Customer.SuspendStartDate = customer.SuspendStartDate;
                 viewModel.Customer.SuspendEndDate = customer.SuspendEndDate;
