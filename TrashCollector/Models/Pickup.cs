@@ -12,12 +12,14 @@ namespace TrashCollector.Models
         [Key]
         public int Id { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0: dd MMM yyyy}")]
         [Display(Name = "Pick-Up Date")]
         public DateTime? PickupDate { get; set; }
 
         [Display(Name = "Pick-Up Day")]
         public DayOfWeek PickupDay { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0: dd MMM yyyy}")]
         [Display(Name = "Second Pick-Up Date")]
         public DateTime? SecondPickupDate { get; set; }
 

@@ -36,9 +36,11 @@ namespace TrashCollector.Models
         [Display(Name = "Total Pickups")]
         public int TotalPickups { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0: dd MMM yyyy}")]
         [Display(Name = "Suspend Start Date")]
         public DateTime? SuspendStartDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0: dd MMM yyyy}")]
         [Display(Name = "Suspend End Date")]
         public DateTime? SuspendEndDate { get; set; }
         

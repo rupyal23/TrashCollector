@@ -243,6 +243,14 @@
     <Compile Include="Migrations\201902092156455_ChangedSPickToNullable.Designer.cs">
       <DependentUpon>201902092156455_ChangedSPickToNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902092209112_AddedDateFormatinPickup.cs" />
+    <Compile Include="Migrations\201902092209112_AddedDateFormatinPickup.Designer.cs">
+      <DependentUpon>201902092209112_AddedDateFormatinPickup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902092212177_ChangedDateFormatinCustomerModel.cs" />
+    <Compile Include="Migrations\201902092212177_ChangedDateFormatinCustomerModel.Designer.cs">
+      <DependentUpon>201902092212177_ChangedDateFormatinCustomerModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -389,6 +397,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902092156455_ChangedSPickToNullable.resx">
       <DependentUpon>201902092156455_ChangedSPickToNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902092209112_AddedDateFormatinPickup.resx">
+      <DependentUpon>201902092209112_AddedDateFormatinPickup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902092212177_ChangedDateFormatinCustomerModel.resx">
+      <DependentUpon>201902092212177_ChangedDateFormatinCustomerModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
