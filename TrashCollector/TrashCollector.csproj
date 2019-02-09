@@ -231,6 +231,18 @@
     <Compile Include="Migrations\201902092057358_RemovedValidationAttForPickUpDAte.Designer.cs">
       <DependentUpon>201902092057358_RemovedValidationAttForPickUpDAte.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902092114542_ChangedPickupDayPropType.cs" />
+    <Compile Include="Migrations\201902092114542_ChangedPickupDayPropType.Designer.cs">
+      <DependentUpon>201902092114542_ChangedPickupDayPropType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902092152409_SecondPickupDayPropUpdated.cs" />
+    <Compile Include="Migrations\201902092152409_SecondPickupDayPropUpdated.Designer.cs">
+      <DependentUpon>201902092152409_SecondPickupDayPropUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902092156455_ChangedSPickToNullable.cs" />
+    <Compile Include="Migrations\201902092156455_ChangedSPickToNullable.Designer.cs">
+      <DependentUpon>201902092156455_ChangedSPickToNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -368,6 +380,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902092057358_RemovedValidationAttForPickUpDAte.resx">
       <DependentUpon>201902092057358_RemovedValidationAttForPickUpDAte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902092114542_ChangedPickupDayPropType.resx">
+      <DependentUpon>201902092114542_ChangedPickupDayPropType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902092152409_SecondPickupDayPropUpdated.resx">
+      <DependentUpon>201902092152409_SecondPickupDayPropUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902092156455_ChangedSPickToNullable.resx">
+      <DependentUpon>201902092156455_ChangedSPickToNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

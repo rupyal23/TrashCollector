@@ -116,21 +116,22 @@ namespace TrashCollector.Controllers
         }
 
         //Post
-        [HttpPost]
-        public ActionResult SelectPickup(EmployeeViewModel Model)
-        {
-            string text = Model.Day.ElementAt(0);
-            var userLoggedIn = User.Identity.GetUserId();
-            var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
-            var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).ToList();
+        //Commented out - will work when fixed the pickupday type - datetime or string
+        //[HttpPost]
+        //public ActionResult SelectPickup(EmployeeViewModel Model)
+        //{
+        //    string text = Model.Day.ElementAt(0);
+        //    var userLoggedIn = User.Identity.GetUserId();
+        //    var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
+        //    var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).ToList();
 
-            var filteredPickups = pickups.Where(z => z.PickupDay == text).ToList();
-            var filteredPickupsTwo = pickups.Where(a => a.SecondPickupDay == text).ToList();
+        //    var filteredPickups = pickups.Where(z => z.PickupDay == text).ToList();
+        //    var filteredPickupsTwo = pickups.Where(a => a.SecondPickupDay == text).ToList();
 
-            filteredPickups.AddRange(filteredPickupsTwo);
+        //    filteredPickups.AddRange(filteredPickupsTwo);
 
-            return View("Index", filteredPickups);
-        }
+        //    return View("Index", filteredPickups);
+        //}
 
         public ActionResult ConfirmPickup(int id)
         {

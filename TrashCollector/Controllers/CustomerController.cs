@@ -93,7 +93,7 @@ namespace TrashCollector.Controllers
             {
                 return View();
             }
-}
+        }
 
         // GET: Customer/Edit/5
         public ActionResult Edit()
@@ -134,7 +134,9 @@ namespace TrashCollector.Controllers
                 var viewModel = new CustomerAddressViewModel
                 {
                     Customer = customer,
-                    Pickup = pickup
+                    Pickup = pickup,
+                    Day = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }
+
                 };
                 return View(viewModel);
             }
@@ -159,10 +161,10 @@ namespace TrashCollector.Controllers
                     Address = customer.Address,
                     Pickup = pickup
                 };
-                viewModel.Pickup.PickupDate = Model.Pickup.PickupDate;
+                viewModel.Pickup.PickupDay = Model.Pickup.PickupDay;
                 
                 viewModel.Pickup.SecondPickupDate = Model.Pickup.SecondPickupDate;
-                viewModel.Pickup.SecondPickupDay = Model.Pickup.SecondPickupDate.Value.DayOfWeek.ToString();
+                viewModel.Pickup.SecondPickupDay = Model.Pickup.SecondPickupDate.Value.DayOfWeek;
                 viewModel.Customer.ExtraPickupRequest = true;
                 
                     
