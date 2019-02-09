@@ -131,5 +131,20 @@ namespace TrashCollector.Controllers
 
             return View("Index", filteredPickups);
         }
+
+        public ActionResult ConfirmPickup(int id)
+        {
+            var pickupToConfirm = context.Pickups.SingleOrDefault(a => a.Id == id);
+            int customerId = pickupToConfirm.CustomerId;
+            context.Pickups.Remove(pickupToConfirm);
+            var customer = context.Customers.Where(a => a.Id == customerId).SingleOrDefault();
+            customer.Balance += 10;
+            customer.TotalPickups += 1;
+            context.SaveChanges();
+            var userLoggedIn = User.Identity.GetUserId();
+            var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
+            var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).ToList();
+            return View("Index", pickups);
+        }
     }
 }
