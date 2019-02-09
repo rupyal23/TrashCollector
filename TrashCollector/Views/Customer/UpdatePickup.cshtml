@@ -1,4 +1,4 @@
-﻿@model TrashCollector.Models.Customer
+﻿@model TrashCollector.Models.CustomerAddressViewModel
 
 @{
     ViewBag.Title = "Update";
@@ -10,39 +10,39 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>@Model.FirstName</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-horizontal">
+        <h4>@Model.Customer.FirstName</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Customer.Id)
 
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PickUpDay, "Update Pickup", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.PickUpDay, "{0: d MMM yyyy}", new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PickUpDay, "dd/MM/yyyy", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pickup.PickupDate, "Update Pickup", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Pickup.PickupDate, "{0: d MMM yyyy}", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Pickup.PickupDate, "dd/MM/yyyy", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer.ExtraPickupRequest, "Request Extra Pickup", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                Yes
+                @Html.RadioButtonFor(model => model.Customer.ExtraPickupRequest, "yes", new { htmlAttributes = new { @class = "form-control" } })
+                No
+                @Html.RadioButtonFor(model => model.Customer.ExtraPickupRequest, "no", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.Customer.SecondPickUpDay, "{0: d MMM yyyy}", new { htmlAttributes = new { @class = "form - control" }, style = "display:none;", type = "text", name = "txt", id = "txt" })
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.ExtraPickupRequest, "Request Extra Pickup", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            Yes
-            @Html.RadioButtonFor(model => model.ExtraPickupRequest, "yes", new { htmlAttributes = new { @class = "form-control" } })
-            No
-            @Html.RadioButtonFor(model => model.ExtraPickupRequest, "no", new { htmlAttributes = new { @class = "form-control" } })
-            @Html.TextBoxFor(model => model.SecondPickUpDay, "{0: d MMM yyyy}", new { htmlAttributes = new { @class = "form - control" }, style = "display:none;", type = "text", name = "txt", id = "txt" })
-        </div>
-        
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 <div>

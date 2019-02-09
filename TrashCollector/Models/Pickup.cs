@@ -12,11 +12,14 @@ namespace TrashCollector.Models
         [Key]
         public int Id { get; set; }
 
-        public DateTime? PickupDate { get; set; }
+        [Required]
+        public DateTime PickupDate { get; set; }
 
-        public DayOfWeek? PickupDay { get; set; }
+        public string PickupDay { get; set; }
 
-        public int Zip { get; set; }
+        [ForeignKey("Customer")]
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
 
 
     }

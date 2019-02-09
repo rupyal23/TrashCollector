@@ -21,6 +21,7 @@ namespace TrashCollector.Models
         public string State { get; set; }
         public int Zip { get; set; }
 
+        public StringBuilder AddressString;
 
     }
 }

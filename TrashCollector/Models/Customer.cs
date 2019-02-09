@@ -23,12 +23,6 @@ namespace TrashCollector.Models
         public int AddressId { get; set; }
         public Address Address { get; set; }
 
-        [ForeignKey("Pickup")]
-        [Display(Name ="Pickup")]
-        public int? PickupId { get; set; }
-        public Pickup Pickup { get; set; }
-
-
         [ForeignKey ("ApplicationUser")]
         public string AppicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
@@ -37,8 +31,6 @@ namespace TrashCollector.Models
 
         public double Budget { get; set; }
 
-        [Display(Name = "Next Pickup")]
-        public DateTime? PickUpDay { get; set; }
 
         [Display(Name = "Extra Pickup")]
         public DateTime? SecondPickUpDay { get; set; }

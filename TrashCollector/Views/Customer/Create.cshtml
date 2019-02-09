@@ -52,7 +52,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Pickup.PickupDate)
             @Html.TextBoxFor(model => model.Pickup.PickupDate, "{0: d MM yyyy}", new { @class = "form-control" })
-            @(Model.Pickup.PickupDay = Model.Pickup.PickupDate.Value.DayOfWeek)
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Customer.Budget)
@@ -60,15 +59,6 @@
             @Html.ValidationMessageFor(model => model.Customer.Budget, "", new { @class = "text-danger" })
 
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.NextPickupId, "NextPickupId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("NextPickupId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.NextPickupId, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
         <div class="form-group">
             <input type="submit" value="Save" class="btn btn-default" />
         </div>

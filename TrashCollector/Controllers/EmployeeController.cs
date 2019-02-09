@@ -21,8 +21,8 @@ namespace TrashCollector.Controllers
         {
             var userLoggedIn = User.Identity.GetUserId();
             var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
-            var pickups = context.Pickups.Where(z => z.Zip == employee.Zip).ToList();
-           
+            var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).ToList();
+
             return View(pickups);
         }
 

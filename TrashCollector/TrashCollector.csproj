@@ -191,6 +191,30 @@
     <Compile Include="Migrations\201902081835078_AddedPickupIdFKInCustomer.Designer.cs">
       <DependentUpon>201902081835078_AddedPickupIdFKInCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902081904208_TwoPropinPickup.cs" />
+    <Compile Include="Migrations\201902081904208_TwoPropinPickup.Designer.cs">
+      <DependentUpon>201902081904208_TwoPropinPickup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902081906447_deletedSecondpickupFromPickup.cs" />
+    <Compile Include="Migrations\201902081906447_deletedSecondpickupFromPickup.Designer.cs">
+      <DependentUpon>201902081906447_deletedSecondpickupFromPickup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902081913549_deletedSecondpickupFromPickup1.cs" />
+    <Compile Include="Migrations\201902081913549_deletedSecondpickupFromPickup1.Designer.cs">
+      <DependentUpon>201902081913549_deletedSecondpickupFromPickup1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902082047341_AddedCustomerIdinPickup.cs" />
+    <Compile Include="Migrations\201902082047341_AddedCustomerIdinPickup.Designer.cs">
+      <DependentUpon>201902082047341_AddedCustomerIdinPickup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902082059304_AddedMigration.cs" />
+    <Compile Include="Migrations\201902082059304_AddedMigration.Designer.cs">
+      <DependentUpon>201902082059304_AddedMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902082122100_ChangedPropinPickup.cs" />
+    <Compile Include="Migrations\201902082122100_ChangedPropinPickup.Designer.cs">
+      <DependentUpon>201902082122100_ChangedPropinPickup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -296,6 +320,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902081835078_AddedPickupIdFKInCustomer.resx">
       <DependentUpon>201902081835078_AddedPickupIdFKInCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902081904208_TwoPropinPickup.resx">
+      <DependentUpon>201902081904208_TwoPropinPickup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902081906447_deletedSecondpickupFromPickup.resx">
+      <DependentUpon>201902081906447_deletedSecondpickupFromPickup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902081913549_deletedSecondpickupFromPickup1.resx">
+      <DependentUpon>201902081913549_deletedSecondpickupFromPickup1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902082047341_AddedCustomerIdinPickup.resx">
+      <DependentUpon>201902082047341_AddedCustomerIdinPickup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902082059304_AddedMigration.resx">
+      <DependentUpon>201902082059304_AddedMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902082122100_ChangedPropinPickup.resx">
+      <DependentUpon>201902082122100_ChangedPropinPickup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
