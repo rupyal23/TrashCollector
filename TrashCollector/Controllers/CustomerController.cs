@@ -23,11 +23,15 @@ namespace TrashCollector.Controllers
             var userLoggedIn = User.Identity.GetUserId();
             var customer = context.Customers.SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
             var pickup = context.Pickups.SingleOrDefault(p => p.CustomerId == customer.Id);
+            var address = context.Addresses.SingleOrDefault(a => a.Id == customer.AddressId);
 
             var viewModel = new CustomerAddressViewModel
             {
                 Customer = customer,
-                Pickup = pickup
+                Pickup = pickup,
+                Address = address, 
+                Day = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }
+
 
             };
             return View(viewModel);
@@ -86,6 +90,10 @@ namespace TrashCollector.Controllers
                 //Now Add Customer to database
                 context.Customers.Add(viewModel.Customer);
                 viewModel.Pickup.CustomerId = viewModel.Customer.Id;
+
+                //Getting Date from Day -- helper method
+                viewModel.Pickup.PickupDate = GetDateFromDay(viewModel.Pickup.PickupDay);
+               
                 context.SaveChanges();
                 return RedirectToAction("Details", viewModel.Customer.Id);
             }
@@ -162,12 +170,14 @@ namespace TrashCollector.Controllers
                     Pickup = pickup
                 };
                 viewModel.Pickup.PickupDay = Model.Pickup.PickupDay;
+                viewModel.Pickup.PickupDate = GetDateFromDay(viewModel.Pickup.PickupDay);
                 
                 viewModel.Pickup.SecondPickupDate = Model.Pickup.SecondPickupDate;
-                viewModel.Pickup.SecondPickupDay = Model.Pickup.SecondPickupDate.Value.DayOfWeek;
-                viewModel.Customer.ExtraPickupRequest = true;
-                
-                    
+                if(viewModel.Pickup.SecondPickupDate != null)
+                {
+                    viewModel.Pickup.SecondPickupDay = Model.Pickup.SecondPickupDate.Value.DayOfWeek;
+                    viewModel.Customer.ExtraPickupRequest = true;
+                }
                 context.SaveChanges();
                 return View("Index", viewModel);
             }
@@ -239,5 +249,25 @@ namespace TrashCollector.Controllers
             return View("Details", customerFromDb);
         }
 
+        public DateTime GetDateFromDay(DayOfWeek day)
+        {
+            DateTime date;
+            int num = (int)day;
+            int num2 = (int)DateTime.Today.DayOfWeek;
+            if(num > num2)
+            {
+                date = DateTime.Today.AddDays(num - num2);
+            }
+            else if(num2 > num)
+            {
+                date = DateTime.Today.AddDays(7-(num2-num));
+            }
+            else
+            {
+                date = DateTime.Today.AddDays(7);
+            }
+            return date;
+            
+        }
     }
 }
