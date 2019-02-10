@@ -134,7 +134,7 @@ namespace TrashCollector.Controllers
             var viewModel = new EmployeeViewModel
             {
                 Employee = employee,
-                Day = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}
+                Day = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "All"}
             };
             return View(viewModel);
         }
@@ -149,7 +149,7 @@ namespace TrashCollector.Controllers
             var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
             var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).ToList();
 
-            if (text != "")
+            if (text != "" && text != "All")
             {
                 var filteredPickups = pickups.Where(z => z.PickupDay.ToString() == text).ToList();
                 var filteredPickupsTwo = pickups.Where(a => a.SecondPickupDay.ToString() == text).ToList();
@@ -158,22 +158,34 @@ namespace TrashCollector.Controllers
 
             }
 
-            return RedirectToAction("Index");
+            return View("Index", pickups);
         }
 
         public ActionResult ConfirmPickup(int id)
         {
             var pickupToConfirm = context.Pickups.SingleOrDefault(a => a.Id == id);
             int customerId = pickupToConfirm.CustomerId;
-            context.Pickups.Remove(pickupToConfirm);
+            pickupToConfirm.Status = "completed";
             var customer = context.Customers.Where(a => a.Id == customerId).SingleOrDefault();
-            customer.Balance += 10;
+            customer.Balance += 5;
             customer.TotalPickups += 1;
+            var parentPickup = context.Pickups.Where(p => p.SecondPickupDate == pickupToConfirm.PickupDate).SingleOrDefault();
+            if(parentPickup != null)
+                parentPickup.SecondPickupDate = null;
             context.SaveChanges();
             var userLoggedIn = User.Identity.GetUserId();
             var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
             var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).ToList();
             return View("Index", pickups);
+        }
+
+        //Made for viewing all customers on a map
+        public ActionResult ViewAll(DayOfWeek text)
+        {
+            var userLoggedIn = User.Identity.GetUserId();
+            var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
+            var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).Where(e => e.PickupDay == text).ToList();
+            return View(pickups);
         }
     }
 }

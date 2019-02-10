@@ -23,7 +23,7 @@
             Second Pick-Up
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Pickup.SecondPickupDate), 
+            @Html.DisplayFor(model => model.Pickup.SecondPickupDate) 
             @Html.DisplayFor(model => model.Pickup.SecondPickupDay)
         </dd>
         <dt>
@@ -45,7 +45,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Update Pickup", "UpdatePickup", new { id = Model.Customer.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Update Pickup Day", "UpdatePickup", new { id = Model.Customer.Id }, new { @class = "btn btn-primary" })
     @Html.ActionLink("Back", "Details", new { id = Model.Customer.Id }, new { @class = "btn btn-primary" })
     @Html.HiddenFor(model => model.Customer.Id)
 </p>

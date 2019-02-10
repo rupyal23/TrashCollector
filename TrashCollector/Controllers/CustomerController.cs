@@ -86,7 +86,7 @@ namespace TrashCollector.Controllers
                 //Now Add Customer to database
                 context.Customers.Add(viewModel.Customer);
                 viewModel.Pickup.CustomerId = viewModel.Customer.Id;
-
+                viewModel.Pickup.Status = "Not-completed";
                 //Getting Date from Day -- helper method
                 viewModel.Pickup.PickupDate = GetDateFromDay(viewModel.Pickup.PickupDay);
                
@@ -172,6 +172,7 @@ namespace TrashCollector.Controllers
                     extraPickup.PickupDate = Model.Pickup.SecondPickupDate;
                     extraPickup.PickupDay = extraPickup.PickupDate.Value.DayOfWeek;
                     extraPickup.CustomerId = customer.Id;
+                    extraPickup.Status = "Not-completed";
                     context.Pickups.Add(extraPickup);
                     customer.ExtraPickupRequest = true;
                 }
@@ -196,6 +197,7 @@ namespace TrashCollector.Controllers
             try
             {
                 var customerFromDb = GetCustomer();
+                var pickup = GetPickups(customerFromDb);
                 if (customerFromDb == null)
                 {
                     return HttpNotFound();
@@ -203,6 +205,7 @@ namespace TrashCollector.Controllers
                 var viewModel = new CustomerAddressViewModel
                 {
                     Customer = customerFromDb,
+                    Pickup = pickup[0]
                 };
                 viewModel.Customer.SuspendStartDate = customer.SuspendStartDate;
                 viewModel.Customer.SuspendEndDate = customer.SuspendEndDate;
