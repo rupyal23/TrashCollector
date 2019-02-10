@@ -58,18 +58,21 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Employee/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
             return View();
         }
 
         // POST: Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Employee employee)
         {
             try
             {
-                // TODO: Add update logic here
+                var userLoggedIn = User.Identity.GetUserId();
+                var employeeFromDb = context.Employees.SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+                employeeFromDb.Zip = employee.Zip;
+                context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -117,21 +120,25 @@ namespace TrashCollector.Controllers
 
         //Post
         //Commented out - will work when fixed the pickupday type - datetime or string
-        //[HttpPost]
-        //public ActionResult SelectPickup(EmployeeViewModel Model)
-        //{
-        //    string text = Model.Day.ElementAt(0);
-        //    var userLoggedIn = User.Identity.GetUserId();
-        //    var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
-        //    var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).ToList();
+        [HttpPost]
+        public ActionResult SelectPickup(EmployeeViewModel Model)
+        {
+            string text = Model.Day.ElementAt(0);
+            var userLoggedIn = User.Identity.GetUserId();
+            var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
+            var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).ToList();
 
-        //    var filteredPickups = pickups.Where(z => z.PickupDay == text).ToList();
-        //    var filteredPickupsTwo = pickups.Where(a => a.SecondPickupDay == text).ToList();
+            if (text != "")
+            {
+                var filteredPickups = pickups.Where(z => z.PickupDay.ToString() == text).ToList();
+                var filteredPickupsTwo = pickups.Where(a => a.SecondPickupDay.ToString() == text).ToList();
+                filteredPickups.AddRange(filteredPickupsTwo);
+                return View("Index", filteredPickups);
 
-        //    filteredPickups.AddRange(filteredPickupsTwo);
+            }
 
-        //    return View("Index", filteredPickups);
-        //}
+            return RedirectToAction("Index");
+        }
 
         public ActionResult ConfirmPickup(int id)
         {

@@ -22,7 +22,7 @@ namespace TrashCollector.Controllers
         {
             var userLoggedIn = User.Identity.GetUserId();
             var customer = context.Customers.SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
-            var pickup = context.Pickups.SingleOrDefault(p => p.CustomerId == customer.Id);
+            var pickup = context.Pickups.FirstOrDefault(p => p.CustomerId == customer.Id);
             var address = context.Addresses.SingleOrDefault(a => a.Id == customer.AddressId);
 
             var viewModel = new CustomerAddressViewModel
@@ -158,28 +158,30 @@ namespace TrashCollector.Controllers
         {
             try
             {
+                
                 var userLoggedIn = User.Identity.GetUserId();
                 var customer = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
                 if (customer == null)
                     return HttpNotFound();
-                var pickup = context.Pickups.SingleOrDefault(p => p.CustomerId == customer.Id);
-                var viewModel = new CustomerAddressViewModel
-                {
-                    Customer = customer,
-                    Address = customer.Address,
-                    Pickup = pickup
-                };
-                viewModel.Pickup.PickupDay = Model.Pickup.PickupDay;
-                viewModel.Pickup.PickupDate = GetDateFromDay(viewModel.Pickup.PickupDay);
+                var pickup = context.Pickups.FirstOrDefault(p => p.CustomerId == customer.Id);
                 
-                viewModel.Pickup.SecondPickupDate = Model.Pickup.SecondPickupDate;
-                if(viewModel.Pickup.SecondPickupDate != null)
+                pickup.PickupDay = Model.Pickup.PickupDay;
+                pickup.PickupDate = GetDateFromDay(pickup.PickupDay);
+                
+                
+                if(pickup.SecondPickupDate == null && Model.Pickup.SecondPickupDate != null)
                 {
-                    viewModel.Pickup.SecondPickupDay = Model.Pickup.SecondPickupDate.Value.DayOfWeek;
-                    viewModel.Customer.ExtraPickupRequest = true;
+                    pickup.SecondPickupDate = Model.Pickup.SecondPickupDate;
+                    pickup.SecondPickupDay = pickup.SecondPickupDate.Value.DayOfWeek;
+                    Pickup extraPickup = new Pickup();
+                    extraPickup.PickupDate = Model.Pickup.SecondPickupDate;
+                    extraPickup.PickupDay = extraPickup.PickupDate.Value.DayOfWeek;
+                    extraPickup.CustomerId = customer.Id;
+                    context.Pickups.Add(extraPickup);
+                    customer.ExtraPickupRequest = true;
                 }
                 context.SaveChanges();
-                return View("Index", viewModel);
+                return RedirectToAction("Index");
             }
             catch
             {
