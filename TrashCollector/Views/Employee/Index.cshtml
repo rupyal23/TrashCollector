@@ -6,16 +6,16 @@
 }
 
 <h2>Index</h2>
-<h3>Trash Pickups</h3>
+<h3>Today's Trash Pickups</h3>
 
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PickupDate)
+            Pick Up
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SecondPickupDate)
+            @Html.DisplayNameFor(model => model.Status)
         </th>
     </tr>
 
@@ -26,8 +26,7 @@
             @Html.DisplayFor(modelItem => item.PickupDay)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SecondPickupDate)
-            @Html.DisplayFor(modelItem => item.SecondPickupDay)
+            @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
             @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
@@ -38,6 +37,6 @@
 
 </table>
 <p>
-    @Html.ActionLink("Select Pickups", "SelectPickup", new { @class = "btn btn-primary" })
-    @Html.ActionLink("Change Work Area", "Edit", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Select Pickups", "SelectPickup", "", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Change Work Area", "Edit", "", new { @class = "btn btn-primary" })
 </p>

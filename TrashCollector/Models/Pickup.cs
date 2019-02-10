@@ -30,6 +30,8 @@ namespace TrashCollector.Models
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 
+        public string Status { get; set; }
+
 
     }
 }

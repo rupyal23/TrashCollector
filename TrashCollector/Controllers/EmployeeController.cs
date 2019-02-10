@@ -20,8 +20,9 @@ namespace TrashCollector.Controllers
         public ActionResult Index()
         {
             var userLoggedIn = User.Identity.GetUserId();
+            var today = DateTime.Today.DayOfWeek;
             var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
-            var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).ToList();
+            var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).Where(e =>e.PickupDay == today).ToList();
 
             return View(pickups);
         }
