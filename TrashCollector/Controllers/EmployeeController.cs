@@ -30,7 +30,27 @@ namespace TrashCollector.Controllers
         // GET: Employee/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                var userLoggedIn = User.Identity.GetUserId();
+                var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
+                var pickup = context.Pickups.SingleOrDefault(z => z.Id == id);
+                var customer = context.Customers.SingleOrDefault(c => c.Id == pickup.CustomerId);
+                var address = context.Addresses.SingleOrDefault(a => a.Id == customer.AddressId);
+                var viewModel = new CustomerAddressViewModel
+                {
+                    Customer = customer,
+                    Address = address,
+                    Pickup = pickup
+                };
+                return View("Details", viewModel);
+            }
+            catch
+            {
+                return View();
+            }
+          
+            
         }
 
         // GET: Employee/Create

@@ -1,0 +1,69 @@
+﻿@model TrashCollector.Models.CustomerAddressViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CustomerAddressViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.StreetNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address.StreetNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.StreetName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.StreetName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.State)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.Zip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.Zip)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Confirm", "ConfirmPickup", new {  id = Model.Pickup.Id }, new { @class = "btn btn-primary" }) 
+    @Html.ActionLink("Back to Pickups", "Index", "", new { @class = "btn btn-primary" })
+</p>
