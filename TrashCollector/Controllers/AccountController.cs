@@ -81,12 +81,11 @@ namespace TrashCollector.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    //returnUrl = "Index";
-                    //Not Working
-                    //if(User.IsInRole("Customer"))
-                    //    return RedirectToAction(returnUrl, "Customer");
-                    //if (User.IsInRole("Employee"))
-                    //    return RedirectToAction(returnUrl, "Employee");
+                    var thisUser = context.Users.SingleOrDefault(c => c.UserName == model.UserName);
+                    if (thisUser.UserRole == "Customer")
+                        return RedirectToAction("Details", "Customer");
+                    if (thisUser.UserRole == "Employee")
+                        return RedirectToAction("Index", "Employee");
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

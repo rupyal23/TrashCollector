@@ -20,8 +20,7 @@ namespace TrashCollector.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            var userLoggedIn = User.Identity.GetUserId();
-            var customer = context.Customers.SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+            var customer = GetCustomer();
             var pickup = context.Pickups.FirstOrDefault(p => p.CustomerId == customer.Id);
             var address = context.Addresses.SingleOrDefault(a => a.Id == customer.AddressId);
 
@@ -32,16 +31,13 @@ namespace TrashCollector.Controllers
                 Address = address, 
                 Day = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }
 
-
             };
             return View(viewModel);
         }
-
         // GET: Customer/Details/5
         public ActionResult Details()
         {
-            var userLoggedIn = User.Identity.GetUserId();
-            var customer = context.Customers.Include(a => a.Address).Where(c => c.AppicationUserId == userLoggedIn).SingleOrDefault();
+            var customer = GetCustomer();
             if (customer == null)
             {
                 return HttpNotFound();
@@ -106,8 +102,7 @@ namespace TrashCollector.Controllers
         // GET: Customer/Edit/5
         public ActionResult Edit()
         {
-            var userLoggedIn = User.Identity.GetUserId();
-            var customer = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+            var customer = GetCustomer();
             if (customer == null)
                 return HttpNotFound();
             return View("UpdatePickup", customer);
@@ -158,9 +153,8 @@ namespace TrashCollector.Controllers
         {
             try
             {
-                
-                var userLoggedIn = User.Identity.GetUserId();
-                var customer = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+
+                var customer = GetCustomer();
                 if (customer == null)
                     return HttpNotFound();
                 var pickup = context.Pickups.FirstOrDefault(p => p.CustomerId == customer.Id);
@@ -191,8 +185,7 @@ namespace TrashCollector.Controllers
 
         public ViewResult SuspendService()
         {
-            var userLoggedIn = User.Identity.GetUserId();
-            var customer = context.Customers.SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
+            var customer = GetCustomer();
             return View(customer);
         }
 
@@ -201,9 +194,7 @@ namespace TrashCollector.Controllers
         {
             try
             {
-                var userLoggedIn = User.Identity.GetUserId();
-                var customerFromDb = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.AppicationUserId == userLoggedIn);
-                var pickup = context.Pickups.SingleOrDefault(p => p.CustomerId == customerFromDb.Id);
+                var customerFromDb = GetCustomer();
                 if (customerFromDb == null)
                 {
                     return HttpNotFound();
@@ -211,7 +202,6 @@ namespace TrashCollector.Controllers
                 var viewModel = new CustomerAddressViewModel
                 {
                     Customer = customerFromDb,
-                    Pickup = pickup
                 };
                 viewModel.Customer.SuspendStartDate = customer.SuspendStartDate;
                 viewModel.Customer.SuspendEndDate = customer.SuspendEndDate;
@@ -246,8 +236,7 @@ namespace TrashCollector.Controllers
         }
         public ViewResult Balance(Customer customer)
         {
-            var userLoggedIn = User.Identity.GetUserId();
-            var customerFromDb = context.Customers.Include(m => m.Address).SingleOrDefault(a => a.AppicationUserId == userLoggedIn);
+            var customerFromDb = GetCustomer();
             return View("Details", customerFromDb);
         }
 
@@ -269,7 +258,13 @@ namespace TrashCollector.Controllers
                 date = DateTime.Today.AddDays(7);
             }
             return date;
-            
+        }
+
+        public Customer GetCustomer()
+        {
+            var userLoggedIn = User.Identity.GetUserId();
+            var customer = context.Customers.Include(a => a.Address).Where(c => c.AppicationUserId == userLoggedIn).SingleOrDefault();
+            return customer;
         }
     }
 }
