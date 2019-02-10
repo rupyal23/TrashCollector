@@ -21,13 +21,13 @@ namespace TrashCollector.Controllers
         public ActionResult Index()
         {
             var customer = GetCustomer();
-            var pickup = context.Pickups.FirstOrDefault(p => p.CustomerId == customer.Id);
+            var pickup = GetPickups(customer);
             var address = context.Addresses.SingleOrDefault(a => a.Id == customer.AddressId);
 
             var viewModel = new CustomerAddressViewModel
             {
                 Customer = customer,
-                Pickup = pickup,
+                Pickup = pickup[0],
                 Address = address, 
                 Day = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }
 
@@ -100,6 +100,7 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Customer/Edit/5
+        //not used anywhere yet
         public ActionResult Edit()
         {
             var customer = GetCustomer();
@@ -109,6 +110,7 @@ namespace TrashCollector.Controllers
         }
 
         // POST: Customer/Edit/5
+        //not used anywhere yet
         [HttpPost]
         public ActionResult Edit(Customer customer)
         {
@@ -133,13 +135,12 @@ namespace TrashCollector.Controllers
             try
             {
                 var customer = context.Customers.Include(a => a.Address).SingleOrDefault(c => c.Id == id);
-                var pickup = context.Pickups.FirstOrDefault(a => a.CustomerId == id);
+                var pickup = GetPickups(customer);
                 var viewModel = new CustomerAddressViewModel
                 {
                     Customer = customer,
-                    Pickup = pickup,
+                    Pickup = pickup[0],
                     Day = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }
-
                 };
                 return View(viewModel);
             }
@@ -265,6 +266,11 @@ namespace TrashCollector.Controllers
             var userLoggedIn = User.Identity.GetUserId();
             var customer = context.Customers.Include(a => a.Address).Where(c => c.AppicationUserId == userLoggedIn).SingleOrDefault();
             return customer;
+        }
+        public List<Pickup> GetPickups(Customer customer)
+        {  
+            var pickups = context.Pickups.Where(p => p.CustomerId == customer.Id).ToList();
+            return pickups;
         }
     }
 }
