@@ -14,6 +14,7 @@ namespace TrashCollector.Controllers
         public EmployeeController()
         {
             context = new ApplicationDbContext();
+            
         }
         // GET: Employee
         //Get a default list of pickups matchin the employee zip code
@@ -140,7 +141,7 @@ namespace TrashCollector.Controllers
         }
 
         //Post
-        //Commented out - will work when fixed the pickupday type - datetime or string
+        
         [HttpPost]
         public ActionResult SelectPickup(EmployeeViewModel Model)
         {
@@ -152,8 +153,8 @@ namespace TrashCollector.Controllers
             if (text != "" && text != "All")
             {
                 var filteredPickups = pickups.Where(z => z.PickupDay.ToString() == text).ToList();
-                var filteredPickupsTwo = pickups.Where(a => a.SecondPickupDay.ToString() == text).ToList();
-                filteredPickups.AddRange(filteredPickupsTwo);
+                //var filteredPickupsTwo = pickups.Where(a => a.SecondPickupDay.ToString() == text).ToList();
+               // filteredPickups.AddRange(filteredPickupsTwo);
                 return View("Index", filteredPickups);
 
             }
@@ -186,6 +187,18 @@ namespace TrashCollector.Controllers
             var employee = context.Employees.SingleOrDefault(e => e.AppicationUserId == userLoggedIn);
             var pickups = context.Pickups.Where(z => z.Customer.Address.Zip == employee.Zip).Where(e => e.PickupDay == text).ToList();
             return View(pickups);
+        }
+
+        //Just Made logic to refresh pickup at end of week, not implemented anywhere yet
+        public void RefreshPickup(Pickup pickup)
+        {
+            DateTime dt = DateTime.Now;
+            if(dt.DayOfWeek.ToString() == "Sunday")
+            {
+                pickup.Status = "Not-completed";
+                pickup.PickupDate.Value.AddDays(7);
+                context.SaveChanges();
+            }
         }
     }
 }
